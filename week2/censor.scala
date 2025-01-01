@@ -24,7 +24,12 @@ object CensorObject extends App {
 
       println("String to replace: ")
       println(wordsToReplace)
-      println(curseWords("shoot"))
+      val curseWordsRegex = curseWords.keys.mkString("|")
+      println(curseWordsRegex)
+      val censoredString = curseWords.foldLeft(wordsToReplace) { case (text, (word, replacement)) =>
+  text.replaceAll(word, replacement)
+}
+      println(censoredString)
     }
 
   class CensorStrings extends Censor {
@@ -32,5 +37,5 @@ object CensorObject extends App {
   }
 
   val test = CensorStrings()
-  test.replaceWord("And I am furiously shouting!")
+  test.replaceWord("And I am furiously shouting! darn shoot shoot  darn ")
 }
